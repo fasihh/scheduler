@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import getLocalStorage from './getLocalStorage';
-import './Home.css'
+import getLocalStorage from '../getLocalStorage';
+import '../styles/Home.css'
 import Navbar from './Navbar';
 import TaskList from './TaskList';
-import useFetch from './useFetch';
+import useFetch from '../useFetch';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -22,10 +22,10 @@ const Home = () => {
         <>
             <Navbar />
             <div className="home">
-                { isLoading && <p className='loading-message'>loading tasks...</p> }
-                { failedLoading && <p className='error-message'>{ errorMessage }</p> }
-                { data && data.count !== 0 && <TaskList tasks={ data.tasks }/> }
-                { data && data.count === 0 && <p className='no-tasks-message'>no tasks yet...</p> }
+                { isLoading && <p className='message loading'>loading tasks...</p> }
+                { failedLoading && <p className='message error'>{ errorMessage }</p> }
+                { data && data.count !== 0 && <TaskList tasks={ data.tasks } count={ data.count }/> }
+                { data && data.count === 0 && <p className='message no-tasks'>no tasks yet...</p> }
             </div> 
         </>
     );

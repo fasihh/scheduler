@@ -9,4 +9,4 @@ const port = process.env.PORT || 3000;
 // start server
 server.listen(port);
 
-console.log(`server like:\nhttp://localhost:${port}`);
+console.log(`server live:\nhttp://localhost:${port}`);

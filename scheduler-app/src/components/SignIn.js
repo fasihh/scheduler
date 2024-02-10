@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Navbar from './Navbar';
-import setLocalStorage from './setLocalStorage';
-import getLocalStorage from './getLocalStorage';
+import setLocalStorage from '../setLocalStorage';
+import getLocalStorage from '../getLocalStorage';
 
-const SignUp = () => {
+const SignIn = () => {
     const navigate = useNavigate();
     const userData = getLocalStorage();
 
@@ -13,14 +13,14 @@ const SignUp = () => {
         // if token exists then navigate to home
         if (userData.token) navigate('/');
     }, [navigate, userData.token]);
-
+    
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState();
 
-    const handleSignUp = () => {
-        fetch(`${process.env.REACT_APP_API_URL}/user/signup`, {
+    const handleSignIn = () => {
+        fetch(`${process.env.REACT_APP_API_URL}/user/signin`, {
             // defining type of request
             method: 'POST',
             // defining basic headers
@@ -34,8 +34,8 @@ const SignUp = () => {
             if (!res.ok) {
                 // throw error depending on status
                 switch(res.status) {
-                    case 409:
-                        throw new Error('user already exists');
+                    case 404:
+                        throw new Error('user doesn\'t exist');
                     case 401:
                         throw new Error('incorrect username or password');
                     default:
@@ -45,7 +45,6 @@ const SignUp = () => {
             return res.json();
         })
         .then(data => {
-            console.log(data.token.split(' ')[1]);
             setLocalStorage({ username: username, token: data.token.split(' ')[1] });
             navigate('/');
         })
@@ -59,8 +58,8 @@ const SignUp = () => {
         <>
             <Navbar />
             <div className="sign-up">
-                <h2>Sign up</h2>
-                <form onSubmit={ handleSignUp }>
+                <h2>Sign in</h2>
+                <form onSubmit={ handleSignIn }>
                     { error && <p className="error-message">{ errorMessage }</p> }
                     <div className="form-input">
                         <label>Username</label>
@@ -79,10 +78,11 @@ const SignUp = () => {
                         />
                     </div>
                 </form>
-                <button onClick={ handleSignUp }>Sign up!</button>
+                <button onClick={ handleSignIn }>Sign in!</button>
             </div>
         </>
+        
     );
 }
  
-export default SignUp;
+export default SignIn;

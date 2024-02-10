@@ -1,0 +1,21 @@
+.home {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.home > h2 {
+    font-size: 23px;
+    margin-top: 40px;
+    align-self: center;
+}
+
+.message {
+    margin-top: 150px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.message.error {
+    color: lightcoral;
+}
