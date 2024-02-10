@@ -28,7 +28,11 @@ module.exports.getTasksByUser = (req, res, next) => {
             })
         });
     })
-    .catch(err => handleError(res, err));
+    // no tasks found by this creator
+    .catch(err => res.status(200).json({
+        count: 0,
+        tasks: []
+    }));
 }
 
 module.exports.updateTaskById = (req, res, next) => {

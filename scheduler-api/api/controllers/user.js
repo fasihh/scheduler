@@ -21,10 +21,27 @@ module.exports.createUser = (req, res, next) => {
             username: req.body.username,
             password: req.body.password
         });
+
+        // creating auth token
+        const token = jwt.sign(
+            {
+                userId: user._id,
+                username: user.username
+            },
+            `${process.env.JWT_KEY}`,
+            {
+                expiresIn: '4h'
+            }
+        );
     
         newUser.save()
         // sending back a response with OK status and a message
-        .then(result => res.status(201).json({ message: 'user created successfully' }))
+        .then(result => {
+            res.status(201).json({ 
+                message: 'user created successfully',
+                token: `Bearer ${token}`
+            });
+        })
         .catch(err => handleError(res, err));
     })
     .catch(err => handleError(res, err));
@@ -53,7 +70,7 @@ module.exports.loginUser = (req, res, next) => {
         // send back success message with token
         return res.status(200).json({
             message: 'login successful',
-            toke: `Bearer ${token}`
+            token: `Bearer ${token}`
         });
     });
 }
