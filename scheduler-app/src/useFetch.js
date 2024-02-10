@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import getLocalStorage from './getLocalStorage';
+import setLocalStorage from './setLocalStorage';
 
 const useFetch = (url) => {
     const [data, setData] = useState();
@@ -23,7 +24,15 @@ const useFetch = (url) => {
         })
         .then(res => {
             // throw error incase any error
-            if (!res.ok) throw new Error('something went wrong');
+            if (!res.ok) {
+                switch(res.status) {
+                    case 401:
+                        // logging out user if unauthorized
+                        setLocalStorage({ token: '', username: '' });
+                    default:
+                        throw new Error('something went wrong');
+                }
+            };
             return res.json(); // get json data from response
         })
         .then(data => setData(data))
