@@ -56,3 +56,12 @@ nav {
 .nav-container .nav-title {
     font-size: 21px;
 }
+
+.header {
+    display: flex;
+    align-items: baseline;
+}
+
+.header div {
+    margin-left: 15px;
+}

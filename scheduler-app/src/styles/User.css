@@ -1,0 +1,67 @@
+/* This is used for signin, signup and create */
+
+.user-form {
+    display: flex;
+    justify-content: center;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    background-color: #222831;
+    margin-top: 150px;
+
+    width: 360px;
+}
+
+.form-container h2 {
+    text-align: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+}
+
+.error-message {
+    font-size: 18px;
+    height: 25px;
+    color: lightcoral;
+    text-align: center;
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-input {
+    display: flex;
+    flex-direction: column;
+
+    padding: 10px 0;
+}
+
+.form-input label {
+    font-size: 18px;
+}
+
+.form-input input {
+    background-color: #393E46;
+    border: none;
+    padding: 10px;
+}
+
+.form-container > button {
+    align-self: center;
+    margin-top: 20px;
+    background: none;
+    border: 1px solid #393E46;
+    border-radius: 3px;
+    width: 50%;
+    padding: 10px;
+    transition-duration: 0.1s;
+}
+
+.form-container > button:hover {
+    background-color: #393E46;
+    transition-duration: 0.1s;
+}

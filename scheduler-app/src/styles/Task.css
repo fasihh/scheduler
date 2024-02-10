@@ -1,67 +1,92 @@
+.tasks-container {
+    display: flex;
+    align-items: center;
+}
+
 .task {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 
-    width: 800px;
-
-    border: 1px solid #4e555f;
-    padding: 20px;
+    padding: 30px;
+    width: 700px;
+    background-color: #222831;
+    border-radius: 5px;
+    border: 3px dashed #50545a;
+    margin-bottom: 30px;
 }
 
 .task-main {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    width: 260px
+    display: flex
 }
 
-.task-main > button {
-    text-align: center;
-    cursor: pointer;
-    font-size: 20px;
+.status-button {
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    margin-right: 20px;
+    align-self: center;
+
     background: none;
     border: none;
-
-    margin-left: 15px;
+    transition-duration: 0.1s;
 }
 
-.task-content h2 {
-    font-size: 24px;
+.status-button:hover {
+    transition-duration: 0.1s;
+    border: 2px solid white;
 }
 
-.task-content {
+.content h1 {
+    font-size: 30px;
+    margin-bottom: 10px;
+    width: 300px;
+
+    word-break: break-all;
+}
+
+.content p {
+    font-size: 20px;
+    width: 300px;
+
+    word-wrap: break-word;
+}
+
+.extras-container {
+    margin-bottom: 20px;
+}
+
+.detail {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 55px;
+    margin: 5px 0;
 }
 
-.task-content p {
-    font-size: 18px
+.detail label {
+    font-size: 18px;
+}
+
+.detail p {
+    font-size: 16px;
 }
 
 .task-extras {
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
-.task-extras p {
-    font-size: 16px;
-    color: #797d82;
-}
-
-.task-extras button {
-    cursor: pointer;
-    font-size: 16px;
-
-    width: 110px;
-    height: 30px;
-    margin: 10px 0;
-
-    background: none;
+.task-extras > button {
+    background-color: #b92e34;
     border: none;
-    color: lightcoral;
 
-    align-self: flex-end;
+    width: 70%;
+    height: 30px;
+    border-radius: 5px;
+    transition-duration: 0.2s;
+}
+
+.task-extras > button:hover {
+    background-color: #d63a42;
+    transition-duration: 0.2s;
 }

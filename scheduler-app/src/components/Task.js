@@ -46,21 +46,28 @@ const Task = ({ task }) => {
         <div className="task">
             <div className="task-main">
                 <button
+                    className='status-button'
                     onClick={ handleUpdateTask }
                     // green if done else red
-                    style={ { 'color': done ? '#50c878' : '#b92e34' } }
-                >
-                    { done ? "done" : "not done" }
-                </button>
-                <div className="task-content">
-                    <h2>{ task.title }</h2>
+                    style={ { 'background-color': done ? '#50c878' : '#b92e34' } }
+                />
+                <div className="content">
+                    <h1>{ task.title }</h1>
                     <p>{ task.content }</p>
                 </div>
             </div>
             <div className="task-extras">
+                <div className="extras-container">
+                    <div className="detail">
+                        <label>Duration</label>
+                        <p>{ task.duration !== undefined ? getDate(task.duration) : "no duration" }</p>
+                    </div>
+                    <div className="detail">
+                        <label>Created at</label>
+                        <p>{ getDate(task.timestamps.createdAt) }</p>
+                    </div>
+                </div>
                 <button onClick={ handleDeleteTask }>delete task</button>
-                <p>duration - { task.duration || "no duration" }</p>
-                <p>created - { getDate(task.timestamps.createdAt) }</p>
             </div>
         </div>
     );

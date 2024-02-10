@@ -21,7 +21,10 @@ const Navbar = () => {
     return (
         <nav>
             <div className="nav-container">
-                <h2><Link to='/' className='nav-title'>Scheduler</Link></h2>
+                <div className="header">
+                    <h2><Link to='/' className='nav-title'>Scheduler</Link></h2>
+                    <div>{ getLocalStorage().username }</div>
+                </div>
                 <ul className='nav-links'>
                     { location.pathname === '/signin' && <li className='nav-link'><Link to='/signup'>sign up</Link></li> }
                     { location.pathname ==='/signup' && <li className='nav-link'><Link to='/signin'>sign in</Link></li> }

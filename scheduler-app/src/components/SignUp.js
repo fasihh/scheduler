@@ -58,28 +58,30 @@ const SignUp = () => {
     return (
         <>
             <Navbar />
-            <div className="sign-up">
-                <h2>Sign up</h2>
-                <form onSubmit={ handleSignUp }>
-                    { error && <p className="error-message">{ errorMessage }</p> }
-                    <div className="form-input">
-                        <label>Username</label>
-                        <input 
-                            value={ username }
-                            onChange={ (e) => setUsername(e.target.value) }
-                            type="text"
-                        />
-                    </div>
-                    <div className="form-input">
-                        <label>Password</label>
-                        <input 
-                            value={ password }
-                            onChange={ (e) => setPassword(e.target.value) }
-                            type="password"
-                        />
-                    </div>
-                </form>
-                <button onClick={ handleSignUp }>Sign up!</button>
+            <div className="user-form">
+                <div className="form-container">
+                    <h2>Sign up</h2>
+                    <form onSubmit={ handleSignUp }>
+                        { error && <p className="error-message">{ errorMessage }</p> }
+                        <div className="form-input">
+                            <label>Username</label>
+                            <input 
+                                value={ username }
+                                onChange={ (e) => setUsername(e.target.value) }
+                                type="text"
+                            />
+                        </div>
+                        <div className="form-input">
+                            <label>Password</label>
+                            <input 
+                                value={ password }
+                                onChange={ (e) => setPassword(e.target.value) }
+                                type="password"
+                            />
+                        </div>
+                    </form>
+                    <button onClick={ handleSignUp }>Sign up!</button>
+                </div>
             </div>
         </>
     );

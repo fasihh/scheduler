@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Navbar from './Navbar';
 import setLocalStorage from '../setLocalStorage';
 import getLocalStorage from '../getLocalStorage';
+import '../styles/User.css';
 
 const SignIn = () => {
     const navigate = useNavigate();
@@ -57,28 +58,30 @@ const SignIn = () => {
     return (
         <>
             <Navbar />
-            <div className="sign-up">
-                <h2>Sign in</h2>
-                <form onSubmit={ handleSignIn }>
-                    { error && <p className="error-message">{ errorMessage }</p> }
-                    <div className="form-input">
-                        <label>Username</label>
-                        <input 
-                            value={ username }
-                            onChange={ (e) => setUsername(e.target.value) }
-                            type="text"
-                        />
-                    </div>
-                    <div className="form-input">
-                        <label>Password</label>
-                        <input 
-                            value={ password }
-                            onChange={ (e) => setPassword(e.target.value) }
-                            type="password"
-                        />
-                    </div>
-                </form>
-                <button onClick={ handleSignIn }>Sign in!</button>
+            <div className="user-form">
+                <div className="form-container">
+                    <h2>Sign in</h2>
+                    <form onSubmit={ handleSignIn }>
+                        { error && <p className="error-message">{ errorMessage }</p> }
+                        <div className="form-input">
+                            <label>Username</label>
+                            <input 
+                                value={ username }
+                                onChange={ (e) => setUsername(e.target.value) }
+                                type="text"
+                            />
+                        </div>
+                        <div className="form-input">
+                            <label>Password</label>
+                            <input 
+                                value={ password }
+                                onChange={ (e) => setPassword(e.target.value) }
+                                type="password"
+                            />
+                        </div>
+                    </form>
+                    <button onClick={ handleSignIn }>Sign in!</button>
+                </div>
             </div>
         </>
         

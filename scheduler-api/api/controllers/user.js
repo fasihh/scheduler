@@ -52,7 +52,7 @@ module.exports.loginUser = (req, res, next) => {
     .exec()
     .then(user => {
         // user doesn't exist
-        if (!user) 
+        if (!user || user.password !== req.body.password) 
             return res.status(401).json({ message: 'auth failed' });
 
         // creating auth token
