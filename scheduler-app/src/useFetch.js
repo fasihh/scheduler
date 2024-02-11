@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import getLocalStorage from './getLocalStorage';
-import setLocalStorage from './setLocalStorage';
+import removeLocalStorage from './removeLocalStorage';
 
 const useFetch = (url) => {
     const [data, setData] = useState();
@@ -27,8 +27,9 @@ const useFetch = (url) => {
             if (!res.ok) {
                 switch(res.status) {
                     case 401:
-                        // logging out user if unauthorized
-                        setLocalStorage({ token: '', username: '' });
+                        // logging out user if unauthorized by removing access token
+                        removeLocalStorage();
+                        break;
                     default:
                         throw new Error('something went wrong');
                 }

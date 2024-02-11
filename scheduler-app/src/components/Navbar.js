@@ -2,13 +2,14 @@ import '../styles/Navbar.css';
 import { Link, useLocation } from 'react-router-dom';
 import getLocalStorage from '../getLocalStorage';
 import setLocalStorage from '../setLocalStorage';
+import removeLocalStorage from '../removeLocalStorage';
 
 const Navbar = () => {
     const userData = getLocalStorage();
 
     // set cached values to empty - sign out
     const handleSignOut = () => {
-        setLocalStorage({ username: '', token: '' });
+        removeLocalStorage();
         window.location.reload();
     }
     
@@ -17,7 +18,8 @@ const Navbar = () => {
     const location = useLocation();
 
     // change navbar links depending on user login status
-    const loggedIn = userData.token.length !== 0;
+    const loggedIn = userData.token ? userData.token.length !== 0 : false;
+
     return (
         <nav>
             <div className="nav-container">
