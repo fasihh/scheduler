@@ -7,7 +7,7 @@
     width: 800px;
     background-color: #222831;
     border-radius: 0 0 5px 5px;
-    border: 2px solid #50545a;
+    border-bottom: 2px solid #50545a;
     border-top: none;
     margin-bottom: 30px;
 }
