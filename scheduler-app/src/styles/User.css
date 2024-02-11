@@ -10,7 +10,8 @@
     flex-direction: column;
     padding: 30px;
     background-color: #222831;
-    margin-top: 150px;
+    margin-top: 10%;
+    border-radius: 5px;
 
     width: 360px;
 }
@@ -48,6 +49,29 @@
     background-color: #393E46;
     border: none;
     padding: 10px;
+}
+
+.form-input select {
+    background-color: #393E46;
+    border: none;
+    padding: 10px;
+}
+
+.form-input option {
+    font-size: 15px;
+}
+
+.form-input option:nth-child(1) {
+    background-color: orange;
+    color: #222831;
+}
+.form-input option:nth-child(2) {
+    background-color: yellow;
+    color: #222831;
+}
+.form-input option:nth-child(3) {
+    background-color: greenyellow;
+    color: #222831;
 }
 
 .form-container > button {

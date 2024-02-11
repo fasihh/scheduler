@@ -2,12 +2,7 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-}
-
-.home > h2 {
-    font-size: 23px;
-    margin-top: 40px;
-    align-self: center;
+    align-items: center;
 }
 
 .message {

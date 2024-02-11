@@ -25,8 +25,8 @@ module.exports.createUser = (req, res, next) => {
         // creating auth token
         const token = jwt.sign(
             {
-                userId: user._id,
-                username: user.username
+                userId: newUser._id,
+                username: newUser.username
             },
             `${process.env.JWT_KEY}`,
             {

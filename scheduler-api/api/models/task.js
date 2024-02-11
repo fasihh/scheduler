@@ -6,8 +6,9 @@ const taskSchema = mongoose.Schema({
     creator: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
     title: { type: String, required: true },
     content: String,
-    duration: String,
-    done: Boolean
+    deadline: String,
+    done: Boolean,
+    priority: { type: Number, required: true, default: 1 }
 }, { versionKey: false, timestamps: true });
 
 module.exports = mongoose.model('Task', taskSchema);

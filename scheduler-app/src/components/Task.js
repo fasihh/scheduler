@@ -43,31 +43,45 @@ const Task = ({ task }) => {
     }
 
     return (
-        <div className="task">
-            <div className="task-main">
-                <button
-                    className='status-button'
-                    onClick={ handleUpdateTask }
-                    // green if done else red
-                    style={ { 'background-color': done ? '#50c878' : '#b92e34' } }
-                />
-                <div className="content">
-                    <h1>{ task.title }</h1>
-                    <p>{ task.content }</p>
-                </div>
+        <div 
+            className="task"
+            style={ { 'borderColor': task.priority === 2 ? 'orange' : task.priority === 1 ? 'yellow' : 'greenyellow'} }
+        >
+            <div 
+                className="task-header" 
+                style={ { 
+                    'backgroundColor': done ? '#50c878' : '#b92e34',
+                    'color': done ? '#222831' : '#DDDDDD'
+                } }
+            >
+                { done ? "task completed" : "task pending" }
             </div>
-            <div className="task-extras">
-                <div className="extras-container">
-                    <div className="detail">
-                        <label>Duration</label>
-                        <p>{ task.duration !== undefined ? getDate(task.duration) : "no duration" }</p>
-                    </div>
-                    <div className="detail">
-                        <label>Created at</label>
-                        <p>{ getDate(task.timestamps.createdAt) }</p>
+            <div className="task-body">
+                <div className="task-main">
+                    <button
+                        className='status-button'
+                        onClick={ handleUpdateTask }
+                        // green if done else red
+                        style={ { 'backgroundColor': done ? '#50c878' : '#b92e34' } }
+                    />
+                    <div className="content">
+                        <h1>{ task.title }</h1>
+                        <p>{ task.content }</p>
                     </div>
                 </div>
-                <button onClick={ handleDeleteTask }>delete task</button>
+                <div className="task-extras">
+                    <div className="extras-container">
+                        <div className="detail">
+                            <label>Deadline</label>
+                            <p>{ task.deadline !== undefined ? getDate(task.deadline) : "no deadline" }</p>
+                        </div>
+                        <div className="detail">
+                            <label>Created at</label>
+                            <p>{ getDate(task.timestamps.createdAt) }</p>
+                        </div>
+                    </div>
+                    <button onClick={ handleDeleteTask }>delete task</button>
+                </div>
             </div>
         </div>
     );

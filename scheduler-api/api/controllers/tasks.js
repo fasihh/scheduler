@@ -7,6 +7,7 @@ const Task = require('../models/task');
 module.exports.getTasksByUser = (req, res, next) => {
     // find all tasks that match the creator id with the authenticated user id
     Task.find({ creator: req.userData.userId })
+    .sort({ 'createdAt': -1 })
     .populate('creator', '_id username') // populate creator id field with some creator info
     .exec()
     .then(tasks => {
@@ -18,8 +19,9 @@ module.exports.getTasksByUser = (req, res, next) => {
                     _id: task._id,
                     title: task.title,
                     content: task.content,
-                    duration: task.duration,
+                    deadline: task.deadline,
                     done: task.done,
+                    priority: task.priority,
                     timestamps: {
                         createdAt: task.createdAt,
                         updatedAt: task.updatedAt
@@ -82,7 +84,8 @@ module.exports.createTask = (req, res, next) => {
         creator: req.userData.userId,
         title: req.body.title,
         content: req.body.content || '',
-        duration: req.body.duration,
+        deadline: req.body.deadline,
+        priority: req.body.priority,
         done: false
     });
 

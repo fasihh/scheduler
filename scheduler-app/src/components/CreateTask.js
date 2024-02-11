@@ -1,7 +1,7 @@
 import Navbar from "./Navbar";
 import '../styles/User.css'; // to create the form
 import '../styles/CreateTask.css' // to make slight changes to the form
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import getLocalStorage from "../getLocalStorage";
 
@@ -13,8 +13,15 @@ const CreateTask = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
     const [date, setDate] = useState(new Date());
+    const [priority, setPriority] = useState(1);
     const [error, setError] = useState(false);
     const [currentDate, setCurrentDate] = useState(Date.now());
+
+    // check to see if user isn't logged in
+    useEffect(() => {
+        // if doesn't exists then navigate to signin
+        if (!getLocalStorage().token) navigate('/signin');
+    }, [navigate, getLocalStorage().token]);
 
     const handleCreate = e => {
         e.preventDefault();
@@ -33,7 +40,8 @@ const CreateTask = () => {
             body: JSON.stringify({ 
                 title: title,
                 content: content,
-                duration: flag ? date : undefined
+                deadline: flag ? date : undefined,
+                priority: priority
             })
         })
         .then(res => {
@@ -70,7 +78,7 @@ const CreateTask = () => {
                             />
                         </div>
                         <div className="form-input">
-                            <label>Duration</label>
+                            <label>Deadline</label>
                             <div className="date-container">
                                 {/* react-datetimepicker dependency gives many features such as these */}
                                 <DatePicker 
@@ -83,6 +91,23 @@ const CreateTask = () => {
                                     isClearable
                                 />
                             </div>
+                        </div>
+                        <div className="form-input">
+                            <label>Priority</label>
+                            <select 
+                                name="priority"
+                                value={ priority }
+                                onChange={ e => setPriority(e.target.value) }
+                            >
+                                <option value={ 2 }>High</option>
+                                <option value={ 1 }>Medium</option>
+                                <option value={ 0 }>Low</option>
+                            </select>
+                            {/* <input 
+                                type="text"
+                                value={ priority }
+                                onChange={ e => setContent(e.target.value) }
+                            /> */}
                         </div>
                     </form>
                         <button onClick={ handleCreate }>Create Task</button>
