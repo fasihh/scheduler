@@ -2,10 +2,10 @@ import { useContext, useState } from 'react';
 import '../styles/Task.css'
 import getDate from '../getDate';
 import getLocalStorage from '../getLocalStorage';
-import { TasksStatusContext } from './Home';
+import { TasksContext } from './Home';
 
 const Task = ({ task }) => {
-    const { completed, setCompleted } = useContext(TasksStatusContext);
+    const { completed, setCompleted } = useContext(TasksContext);
     // this is used to update the task status when clicked
     const [done, setDone] = useState(task.done); 
 

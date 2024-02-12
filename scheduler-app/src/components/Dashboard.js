@@ -1,11 +1,11 @@
 import { useState, useEffect, useContext } from 'react';
 import getLocalStorage from '../getLocalStorage';
 import '../styles/Dashboard.css';
-import { TasksStatusContext } from './Home';
+import { TasksContext } from './Home';
 
 const Dashboard = ({ tasks }) => {
     // storing counts for task info
-    const { completed } = useContext(TasksStatusContext);
+    const { completed } = useContext(TasksContext);
 
     const [deadlines, setDeadlines] = useState(0);
     const [failedDeadlines, setFailedDeadlines] = useState(0);
@@ -62,20 +62,16 @@ const Dashboard = ({ tasks }) => {
                     <h2 className="detail-title">Low priority</h2>
                     <div className="detail-content">{ priorities.low }</div>
                 </div>
-                <div className="detail">
-                    <h2 className="detail-title">Low priority</h2>
-                    <div className="detail-content">{ priorities.low }</div>
-                </div>
             </div>
             <h2>Deadlines</h2>
             <div className="details">
                 <div className="detail">
                     <h2>Deadlines near</h2>
-                    <div className='detail-content'>{ deadlines ? deadlines : "none" }</div>
+                    <div className='detail-content'>{ deadlines || "none" }</div>
                 </div>
                 <div className="detail">
                     <h2>Deadlines failed</h2>
-                    <div className='detail-content'>{ failedDeadlines ? failedDeadlines : "none" }</div>
+                    <div className='detail-content'>{ failedDeadlines || "none" }</div>
                 </div>
             </div>
         </div>

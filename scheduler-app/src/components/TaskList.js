@@ -2,8 +2,10 @@ import Task from './Task';
 import '../styles/TaskList.css'
 import { useState } from 'react';
 
-const TaskList = ({ tasks }) => {
+const TaskList = ({ tasks, search }) => {
     const [checked, setChecked] = useState('time');
+
+    const regexp = RegExp(`.*${search.split(' ').join('|')}.*`, 'igm');
 
     const handleSort = e => {
         setChecked(e.target.value);
@@ -52,9 +54,12 @@ const TaskList = ({ tasks }) => {
             </div> 
             }
             <div className="tasks-container">
-                { tasks.map(task => {
-                    return ( <Task task={ task } key={ task._id }/> );
-                })}
+                { tasks
+                    .filter(task => search ? regexp.test(task.title) ? task : undefined : task)
+                    .map(task => {
+                        return ( <Task task={ task } key={ task._id }/> );
+                    })
+                }
             </div>
         </>
     );

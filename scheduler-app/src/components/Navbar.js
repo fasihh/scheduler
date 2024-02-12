@@ -1,7 +1,6 @@
 import '../styles/Navbar.css';
 import { Link, useLocation } from 'react-router-dom';
 import getLocalStorage from '../getLocalStorage';
-import setLocalStorage from '../setLocalStorage';
 import removeLocalStorage from '../removeLocalStorage';
 
 const Navbar = () => {

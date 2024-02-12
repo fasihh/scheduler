@@ -12,6 +12,7 @@
 }
 
 .message.error {
+    font-size: 18px;
     color: lightcoral;
 }
 

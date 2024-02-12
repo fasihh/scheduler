@@ -6,8 +6,10 @@ import Navbar from './Navbar';
 import TaskList from './TaskList';
 import useFetch from '../useFetch';
 import Dashboard from './Dashboard';
+import SearchBar from './SearchBar';
 
-export const TasksStatusContext = createContext();
+// creating a globally available context
+export const TasksContext = createContext();
 
 const Home = () => {
     const navigate = useNavigate();
@@ -26,27 +28,33 @@ const Home = () => {
 
     // whenever data gets updated, update the value inside
     useEffect(() => {
-        if (!data) return;
+        // check if data received
+        // check for data.tasks in case api sends back any other info
+        if (!data || !data.tasks) return;
         // count all tasks with done as true
         setCompleted(data.tasks.filter(task => task.done).length);
-        setTasks(data.tasks);
+        setTasks(data.tasks || []);
     }, [data]);
+
+    // storing the search bar string here to let task-list use it
+    const [search, setSearch] = useState('');
 
     return (
         <>
             <Navbar />
             <div className="home">
                 {/* allow child components to use and change the context value */}
-                <TasksStatusContext.Provider value={{ completed, setCompleted }}>
-                    {/* always load dashboard even when tasks not fetched */}
+                {/* also using the task state for searching */}
+                <TasksContext.Provider value={{ completed, setCompleted }}>
+                    {/* always load dashboard and searchbar even when tasks not fetched */}
                     <Dashboard tasks={ tasks } />
-                    <TaskList tasks={ tasks }/>
-                </TasksStatusContext.Provider>
+                    <SearchBar search={ search } setSearch={ setSearch } />
+                    <TaskList tasks={ tasks } search={ search } />
+                </TasksContext.Provider>
                 
                 { isLoading && <p className='message loading'>loading tasks...</p> }
                 { failedLoading && <p className='message error'>{ errorMessage }</p> }
-                
-                { tasks.length === 0 && <p className='message no-tasks'>no tasks yet...</p> }
+                { !failedLoading && tasks.length === 0 && <p className='message no-tasks'>no tasks yet...</p> }
                 
             </div> 
         </>
