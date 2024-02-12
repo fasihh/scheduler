@@ -1,14 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import '../styles/Task.css'
 import getDate from '../getDate';
 import getLocalStorage from '../getLocalStorage';
+import { TasksStatusContext } from './Home';
 
 const Task = ({ task }) => {
+    const { completed, setCompleted } = useContext(TasksStatusContext);
     // this is used to update the task status when clicked
     const [done, setDone] = useState(task.done); 
 
     // update this task
-    const handleUpdateTask = () => {
+    const handleUpdateTask = e => {
         fetch(`${process.env.REACT_APP_API_URL}/tasks/${task._id}`, {
             method: 'PATCH',
             headers: {
@@ -20,8 +22,16 @@ const Task = ({ task }) => {
         })
         .then(res => {
             if (!res.ok) throw new Error();
-            setDone(!done);
-            return res.json();
+            console.log(task);
+
+            if (done) {
+                setDone(false);
+                setCompleted(completed-1);
+            } else {
+                setDone(true);
+                setCompleted(completed+1);
+            }
+            
         })
         .catch(err => console.log('error in updating task'));
     }
@@ -37,6 +47,7 @@ const Task = ({ task }) => {
         })
         .then(res => {
             if (!res.ok) throw new Error();
+            // reload page when deleted
             window.location.reload();
         })
         .catch(err => console.log('error in deleting task'));
@@ -61,7 +72,7 @@ const Task = ({ task }) => {
                     <div className="task-main">
                         <button
                             className='status-button'
-                            onClick={ handleUpdateTask }
+                            onClick={ task => handleUpdateTask(task) }
                             // green if done else red
                             style={ { 'backgroundColor': done ? '#50c878' : '#b92e34' } }
                         />
@@ -73,12 +84,12 @@ const Task = ({ task }) => {
                     <div className="task-extras">
                         <div className="extras-container">
                             <div className="detail">
-                                <label>Deadline</label>
-                                <p>{ task.deadline !== undefined ? getDate(task.deadline) : "no deadline" }</p>
+                                <label>created at</label>
+                                <p>{ getDate(task.timestamps.createdAt) }</p>
                             </div>
                             <div className="detail">
-                                <label>Created at</label>
-                                <p>{ getDate(task.timestamps.createdAt) }</p>
+                                <label>deadline</label>
+                                <p>{ task.deadline !== undefined ? getDate(task.deadline) : "no deadline" }</p>
                             </div>
                         </div>
                         <button onClick={ handleDeleteTask }>delete task</button>

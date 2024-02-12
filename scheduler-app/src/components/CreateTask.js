@@ -23,6 +23,14 @@ const CreateTask = () => {
         if (!getLocalStorage().token) navigate('/signin');
     }, [navigate, getLocalStorage().token]);
 
+    // dont let user pick dates before now
+    const filterTime = time => {
+        const currentDate = new Date();
+        const selectedDate = new Date(time);
+
+        return currentDate.getTime() < selectedDate.getTime();
+    }
+
     const handleCreate = e => {
         e.preventDefault();
 
@@ -85,10 +93,13 @@ const CreateTask = () => {
                                     className="date-picker"
                                     onChange={ date => setDate(date) }
                                     minDate={ currentDate }
+                                    filterTime={ filterTime }
                                     selected={ date }
-                                    dateFormat={"dd/mm/yyyy hh:mm aa"}
+                                    dateFormat={"dd/MM/yyyy hh:mm aa"}
                                     showTimeSelect
                                     isClearable
+                                    // disable input in this field
+                                    onKeyDown={e => e.preventDefault()}
                                 />
                             </div>
                         </div>

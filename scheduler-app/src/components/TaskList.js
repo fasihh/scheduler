@@ -2,7 +2,7 @@ import Task from './Task';
 import '../styles/TaskList.css'
 import { useState } from 'react';
 
-const TaskList = ({ tasks, count }) => {
+const TaskList = ({ tasks }) => {
     const [checked, setChecked] = useState('time');
 
     const handleSort = e => {
@@ -25,8 +25,10 @@ const TaskList = ({ tasks, count }) => {
 
     return (
         <>
+            {/* show sorting options only when tasks show */}
+            { tasks.length > 0 && 
             <div className="tasks-options">
-                <h2>{ count > 0 ? `all '${count}' task(s)` : "no tasks" }</h2>
+                <h2>Sort tasks by</h2>
                 <div className="sort-options">
                     <label>
                         <input 
@@ -47,7 +49,8 @@ const TaskList = ({ tasks, count }) => {
                         Priority
                     </label>
                 </div>
-            </div>
+            </div> 
+            }
             <div className="tasks-container">
                 { tasks.map(task => {
                     return ( <Task task={ task } key={ task._id }/> );
