@@ -1,0 +1,28 @@
+.notes {
+    margin-top: 20px;
+}
+
+.notes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 900px;
+}
+
+.notes-header h2 {
+    font-size: 22px;
+}
+
+.notes-header > button {
+    align-self: center;
+    background: none;
+    border: 1px solid #393E46;
+    border-radius: 4px;
+    padding: 10px;
+    transition-duration: 0.1s;
+}
+
+.notes-header > button:hover {
+    background-color: #393E46;
+    transition-duration: 0.1s;
+}

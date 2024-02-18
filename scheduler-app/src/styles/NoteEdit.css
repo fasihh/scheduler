@@ -1,0 +1,32 @@
+.form-container.note {
+    margin-top: 5%;
+    width: 800px;
+}
+
+.form-container.note h1 {
+    text-align: center;
+}
+
+.form-container.note input {
+    font-size: 18px;
+    outline: none
+}
+
+.form-input.note textarea {
+    min-height: 400px;
+    background-color: #393E46;
+    border: none;
+    padding: 10px;
+    font-size: 18px;
+    outline: none;
+    resize: none;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.button-container button {
+    width: 48%;
+}

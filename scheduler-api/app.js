@@ -7,6 +7,7 @@ const app = express();
 // api routes
 const userRoutes = require('./api/routes/user');
 const taskRoutes = require('./api/routes/task');
+const noteRoutes = require('./api/routes/note');
 
 // db connection
 mongoose.connect(
@@ -27,5 +28,6 @@ app.use(cors());
 // using routes
 app.use('/user', userRoutes);
 app.use('/tasks', taskRoutes);
+app.use('/notes', noteRoutes);
 
 module.exports = app;

@@ -44,14 +44,12 @@ nav {
 .nav-links {
     display: flex;
     flex-direction: row-reverse;
-    justify-content: space-between;
 
     list-style-type: none;
-    max-width: 270px;
-    width: 100%;
 }
 
 .nav-link {
+    margin-left: 30px;
     align-self: center;
 }
 

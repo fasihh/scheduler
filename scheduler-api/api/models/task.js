@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const taskSchema = mongoose.Schema({
     _id: mongoose.Schema.ObjectId,
     creator: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-    title: { type: String, required: true },
+    title: String,
     content: String,
     deadline: String,
     done: Boolean,

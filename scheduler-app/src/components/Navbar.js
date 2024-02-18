@@ -30,7 +30,16 @@ const Navbar = () => {
                     { location.pathname === '/signin' && <li className='nav-link'><Link to='/signup'>sign up</Link></li> }
                     { location.pathname ==='/signup' && <li className='nav-link'><Link to='/signin'>sign in</Link></li> }
                     { loggedIn && <li className='nav-link'><button onClick={ handleSignOut }>sign out</button></li> }
-                    { loggedIn && <li className='nav-link'><Link to='/create'>create task</Link></li> }
+                    { loggedIn && !location.pathname.match('notes') &&
+                        <li className='nav-link'><Link to='/create'>create task</Link></li> 
+                    }
+                    { loggedIn && !location.pathname.match('notes') && 
+                        <li className='nav-link'><Link to='/notes'>notes</Link></li> 
+                    }
+                    { loggedIn && location.pathname.match('notes') &&
+                        <li className="nav-link"><Link to='/'>tasks</Link></li>
+                    }
+                    { loggedIn && <li className="nav-link"><Link to='/timer'>timer</Link></li>}
                 </ul>
             </div>
         </nav>
