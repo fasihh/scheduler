@@ -1,5 +1,5 @@
 import Task from './Task';
-import '../styles/TaskList.css'
+import '../styles/TaskList.css';
 import { useState } from 'react';
 
 const TaskList = ({ tasks, search }) => {
